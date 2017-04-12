@@ -1,0 +1,50 @@
+Wardrobe 
+
+Version 0.1
+
+Setup
+
+1. Install dependencies: 
+
+cpanm --installdeps . 
+
+2. Database
+
+You need to have installed MySQL. File to create wardrobe database is 
+scripts/build_db.sql
+
+From command line, run the following command with you mysql credentials: 
+mysql -u <username> -p <password> < scripts/build_db.sql
+
+Populate database: 
+You can find the script that populates the database in scripts/populate_db.pl.
+This script will expect as argument a string that represents the filname that you want to import, database user and users database password. Data in that csv files will be used to populate wardrobe.clothes table.
+
+From command line, run
+    perl scripts/populate_db.pl <csv_file> <db_user> <db_password>
+
+You can find the csv example file in folder tmp/
+
+3. App DB Plugin configuration
+    DBIC Dancer plugin needs to be updated with you db credentials. For this open 
+config.yaml. You will find a configuration like this:
+
+plugins:
+  DBIC:
+    wardrobe:
+      dsn:  "dbi:mysql:wardrobe"
+      schema_class : Wardrobe::Model::Schema
+      user: <username>
+      password: <password>
+      options:
+        RaiseError: 1
+        PrintError: 1
+        mysql_enable_utf8: 1
+
+Please fill the user and password with your db credentials.
+
+4. Start application
+
+perl bin/app.pl
+
+DONE

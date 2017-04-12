@@ -1,0 +1,37 @@
+<form method="POST" action="save">
+  <% IF outfit %>
+  <input type="hidden" name="id" value="<% outfit.id %>" />
+  <% END %>
+  <div class="row">
+    <div class="large-12 columns">
+      <label> Outfit Name</label>
+        <input type="text" name="tag" value="<% outfit ? outfit.tag : undef %>"  placeholder="e.g Metalic mood" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-4 columns">
+      <label>Description</label>
+        <textarea name="description" placeholder="e.g Perfect outfit for a..."><% outfit ? outfit.description : undef %></textarea>
+    </div>
+  </div>
+  </br>
+<% IF clothes.size %>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Add clothes to outfit</label>
+        <% FOREACH cloth in clothes %>
+        <div class="row">
+            <div class="large-12 columns">
+              <input id="cloth_<% cloth.id %>" name="cloth" value="<% cloth.id %>" type="checkbox" <% existing_clothes.exists(cloth.id) ? "checked" : undef %>  ><label for="cloth_<% cloth.id %>"><% cloth.name %></label>
+            </div>
+        </div>
+        <% END %>
+    </div>
+  </div>
+<% END %>
+  <div class="row">
+    <div class="large-4 small-3 columns">
+      <input class="button" type="submit" value="<% outfit ? 'Update' : 'Create'%> outfit">
+    </div>
+  </div>
+</form>

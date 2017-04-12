@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="small-2 columns">
+    <label> Name: </label>
+  </div>
+  <div class="small-10 columns"><% outfit.tag %></div>
+</div>
+</br>
+<div class="row">
+  <div class="small-2 columns"><label> Description: </label></div>
+  <div class="small-10 columns"><% outfit.description %></div>
+</div>
+</br>
+<div class="row">
+  <div class="small-2 columns"><label> Clothes: </label></div>
+  <div class="small-10 columns">
+    <% FOREACH cloth in outfit.clothes %>
+    <div class="row">
+      <div class="small-10 columns">
+        <% cloth.name %>
+      </div>
+    </div>
+    <% END %>
+  </div>
+<div class="row">
+  <a href="/outfits/edit?id=<% outfit.id %>" class="button tiny">Edit Outfit</a>
+</div>
+</div>

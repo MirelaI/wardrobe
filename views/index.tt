@@ -1,0 +1,27 @@
+<table role="grid">
+  <thead>
+    <tr>
+      <th width="200">Item</th>
+      <th>Category</th>
+      <th width="150">Outfits</th>
+      <th width="150">Actions</th>
+    </tr>
+  </thead>
+    <tbody>
+      <% FOREACH cloth in clothes%>
+        <tr>
+          <td><% cloth.name %></td>
+          <td><% cloth.category %></td>
+           <td>
+            <% FOREACH outfit in cloth.outfits %>
+              <a href="/outfits/view?id=<% outfit.id %>" ><%outfit.tag %></a></br>
+            <% END %>
+          </td>
+          <td> 
+            <a href="/cloth/edit?id=<% cloth.id %>">Edit</a>
+            <a href="/cloth/delete?id=<% cloth.id %>">Delete</a>
+          </td>
+        </tr>
+      <% END %>
+    </tbody>
+</table>

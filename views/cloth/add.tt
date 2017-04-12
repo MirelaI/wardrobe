@@ -1,0 +1,42 @@
+<% IF deferred.error %>
+  <small class="error"><% deferred.error %></small>
+<% END %>
+<form action="save" method="POST">
+  <% IF cloth %>
+  <input type="hidden" name="id" value="<% cloth.id %>" />
+  <% END %>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Name
+        <input type="text" name="name" value="<% cloth ? cloth.name : undef %>" placeholder="e.g. Some fancy name" />
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-4 columns">
+      <label> Category
+        <input name="category" type="text" value="<% cloth ? cloth.category : undef %>" placeholder="e.g. t-shirt" />
+      </label>
+    </div>
+  </div>
+<% IF outfits.size %>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Tag cloth to outfits</label>
+        <% FOREACH outfit IN outfits %>
+        <div class="row">
+            <div class="large-12 columns">
+              <input id="outfit_<% outfit.id %>" name="outfit" value="<% outfit.id %>" type="checkbox" <% existing_outfits.exists(outfit.id) ? "checked" : undef %>  ><label for="outfit_<% outfit.id %>"><% outfit.tag %>
+            </div>
+        </div>
+        <% END %>
+      </label>
+    </div>
+  </div>
+<% END %>
+  <div class="row">
+    <div class="large-4 small-3 columns">
+      <input class="button" type="submit" value="<% cloth ? 'Update' : 'Add to'%> wardrobe">
+    </div>
+  </div>
+</form>
